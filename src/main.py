@@ -281,7 +281,8 @@ def run_complete_evaluation(train_agents: bool = True, train_episodes: int = 100
     print("=" * 60)
     
     # Initialize environment
-    env = TrafficEnvironment(gui=False, step_length=10)
+    config_path = os.path.join("..", "config", "traffic_simulation.sumocfg")
+    env = TrafficEnvironment(config_file=config_path, gui=False, step_length=10)
     
     # Store all evaluation results
     all_results = {}
