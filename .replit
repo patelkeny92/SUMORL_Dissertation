@@ -16,15 +16,20 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Traffic Control Demo"
+args = "Traffic Dashboard"
 
 [[workflows.workflow]]
-name = "Traffic Control Demo"
+name = "Traffic Dashboard"
 author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "python demo_simulation.py"
+args = "streamlit run traffic_dashboard.py --server.port=5000 --server.address=0.0.0.0"
+waitForPort = 5000
 
 [workflows.workflow.metadata]
-outputType = "console"
+outputType = "webview"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
