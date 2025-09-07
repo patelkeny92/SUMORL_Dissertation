@@ -21,6 +21,9 @@ import threading
 # Add src to path for imports
 sys.path.insert(0, 'src')
 
+# Import simulation runner
+from simulation_runner import runner
+
 # Set page configuration
 st.set_page_config(
     page_title="Traffic Signal Control Dashboard",
@@ -266,6 +269,34 @@ def main():
     # Simulation parameters
     st.sidebar.subheader("📊 Simulation Parameters")
     episodes_to_show = st.sidebar.slider("Episodes to Display", 10, 50, 30)
+    
+    # Interactive simulation controls
+    st.sidebar.subheader("🚀 Run New Simulation")
+    controller_to_run = st.sidebar.selectbox(
+        "Select Controller to Test",
+        ['Fixed-Time', 'Actuated', 'DQN', 'PPO']
+    )
+    
+    simulation_episodes = st.sidebar.slider("Number of Episodes", 5, 25, 10)
+    
+    if st.sidebar.button("🏃 Run Simulation", type="primary"):
+        with st.spinner(f"Running {controller_to_run} simulation..."):
+            # Run the simulation
+            result = runner.run_quick_simulation(controller_to_run, simulation_episodes)
+            if 'error' not in result:
+                st.sidebar.success(f"✅ {controller_to_run} simulation completed!")
+                st.sidebar.metric("Avg Delay", f"{result['avg_delay']:.1f}s")
+                st.sidebar.metric("Avg Queue", f"{result['avg_queue']:.1f}")
+                st.sidebar.metric("Throughput", f"{result['throughput']:.0f}")
+            else:
+                st.sidebar.error(f"❌ Simulation failed: {result['error']}")
+    
+    # Clear results
+    if st.sidebar.button("🗑️ Clear Results"):
+        if os.path.exists("dashboard_results.json"):
+            os.remove("dashboard_results.json")
+        st.sidebar.success("Results cleared!")
+        st.rerun()
     
     # Load data
     df = load_sample_data()
