@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+    
+    <!-- Vehicle types -->
+    <vType id="car" accel="2.6" decel="4.5" sigma="0.5" length="5.0" minGap="2.5" maxSpeed="50.0" guiShape="passenger"/>
+    
+    <!-- Routes through the intersection -->
+    <route id="north_to_south" edges="north_approach south_exit"/>
+    <route id="south_to_north" edges="south_approach north_exit"/>
+    <route id="east_to_west" edges="east_approach west_exit"/>
+    <route id="west_to_east" edges="west_approach east_exit"/>
+    
+    <route id="north_to_east" edges="north_approach east_exit"/>
+    <route id="north_to_west" edges="north_approach west_exit"/>
+    <route id="south_to_east" edges="south_approach east_exit"/>
+    <route id="south_to_west" edges="south_approach west_exit"/>
+    <route id="east_to_north" edges="east_approach north_exit"/>
+    <route id="east_to_south" edges="east_approach south_exit"/>
+    <route id="west_to_north" edges="west_approach north_exit"/>
+    <route id="west_to_south" edges="west_approach south_exit"/>
+    
+    <!-- Traffic flows -->
+    <flow id="flow_north_south" route="north_to_south" begin="0" end="3600" vehsPerHour="400" type="car"/>
+    <flow id="flow_south_north" route="south_to_north" begin="0" end="3600" vehsPerHour="350" type="car"/>
+    <flow id="flow_east_west" route="east_to_west" begin="0" end="3600" vehsPerHour="300" type="car"/>
+    <flow id="flow_west_east" route="west_to_east" begin="0" end="3600" vehsPerHour="250" type="car"/>
+    
+    <flow id="flow_north_east" route="north_to_east" begin="0" end="3600" vehsPerHour="100" type="car"/>
+    <flow id="flow_north_west" route="north_to_west" begin="0" end="3600" vehsPerHour="80" type="car"/>
+    <flow id="flow_south_east" route="south_to_east" begin="0" end="3600" vehsPerHour="70" type="car"/>
+    <flow id="flow_south_west" route="south_to_west" begin="0" end="3600" vehsPerHour="90" type="car"/>
+    <flow id="flow_east_north" route="east_to_north" begin="0" end="3600" vehsPerHour="60" type="car"/>
+    <flow id="flow_east_south" route="east_to_south" begin="0" end="3600" vehsPerHour="75" type="car"/>
+    <flow id="flow_west_north" route="west_to_north" begin="0" end="3600" vehsPerHour="65" type="car"/>
+    <flow id="flow_west_south" route="west_to_south" begin="0" end="3600" vehsPerHour="55" type="car"/>
+    
+</routes>
